@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+
+int fibo(int n,int *dp){
+  if(n==0 || n==1){
+    return n;
+  }
+  // to check present value of occured overlapping case
+  if(dp[n]!=0){
+    return dp[n];
+  }
+
+ int ans = fibo(n-1,dp) + fibo(n-2,dp);
+ return dp[n]=ans;
+}
+
+int main(){
+ int n;
+ cin>>n;
+ int dp[100]={0};
+
+ cout<<fibo(n,dp);
+
+   return 0; 
+}
