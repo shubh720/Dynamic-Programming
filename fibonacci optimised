@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+
+// bottom up approach
+int fibo(int n){
+ // make an array initialise 0->0 ,1->1 and then continue 
+  if(n==0 || n==1){
+      return n;
+  }
+ int a=0;
+ int b=1;
+ int c;
+
+ int i=2;
+   while(i<=n){
+     c = a+b;
+     // now just update/give a value of b and b value of c
+     a = b;
+     b = c; 
+  i++;
+   } 
+ return c;
+}
+
+int main(){
+ int n;
+ cin>>n;
+ 
+ cout<<fibo(n);
+
+   return 0; 
+}
