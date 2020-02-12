@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+
+int curr(int *currency,int num,int n){
+ int val = 0;
+ for(int i=0;i<n;i++){
+   if(currency[i] <= num){
+      val = currency[i];
+   }
+ }
+ return val;  
+}
+
+int denomination_count(int *currency,int num,int n){
+ if(num == 0){
+   return 0;  // as no amount leads to no valid currency
+ }
+
+ int check_possible = curr(currency,num,n);
+ int count =  1 + denomination_count(currency,num - check_possible,n);
+ return count; 
+}
+
+int main(){
+ //int currency[] = {1,2,5,10,20,50,100,200,500,1000,2000};
+ int currency[]={1,7,10};
+ int n = sizeof(currency)/sizeof(int);
+ int num;
+ cin>>num;  // currency value
+
+ cout<< denomination_count(currency,num,n);
+   return 0; 
+}
