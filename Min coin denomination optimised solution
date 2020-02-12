@@ -1,0 +1,37 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+
+int denomination_count(int *currency,int *dp,int amt,int n){
+  if(amt == 0){
+      return 0; // no amount leads to no valid currency
+  }
+ 
+ if(dp[amt]!=0){
+     return dp[amt];
+ }
+// means amt is not zero so check all possible changes for present amt
+// number of changes makes same number of options for 12 --> options: 1,2,5,10
+int min_value = INT_MAX;
+ for(int i=0;i<n;i++){
+    if(currency[i] <= amt){
+        int val = currency[i];
+        // recursion for rest amt-val
+        int ans = 1 + denomination_count(currency,dp,amt-val,n);  
+        min_value = min(min_value,ans);
+    } 
+ }  
+return dp[amt] = min_value;
+// when here it have array containing all steps
+}
+
+int main() {
+ //int currency[]={1,2,5,10,20,50,100,200,500,1000,2000};
+ int currency[] = {1,7,10};
+ int n=sizeof(currency)/sizeof(int);
+ int amt; // amount 
+ cin>>amt;
+ int dp[1000]={0};
+  cout<< denomination_count(currency,dp,amt,n);
+  return 0;
+}
