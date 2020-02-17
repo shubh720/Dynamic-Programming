@@ -1,0 +1,30 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+
+int denomination_count(int *currency,int *dp,int amt,int n){
+ 
+  for(int i=1;i<=amt;i++){
+     dp[i] = 1000000;  // INT_MAX val
+      for(int j=0;j<n;j++) {
+          // currency pe
+         if(currency[j] <= i){
+             int val = currency[j];
+             int ans = 1 + dp[i-val];
+             dp[i] = min(dp[i],ans);
+         } 
+      }
+  }
+ return dp[amt];
+}
+
+int main(){
+ int currency[] = {1,2,5,10,20,50,100,200,500,1000,2000};
+ int n=sizeof(currency)/sizeof(int);
+ int amt;
+ cin>>amt; 
+ int dp[200] = {0}; 
+
+  cout<< denomination_count(currency,dp,amt,n) <<endl;
+   return 0; 
+}
