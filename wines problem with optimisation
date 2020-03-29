@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+
+int max_price(int* price,int i,int j,int y,int dp[][10]){
+ // base case
+  if(i > j){
+      return 0;
+  }
+
+ // if already exist
+ if(dp[i][j] != 0){
+     return dp[i][j];
+ }
+ 
+ // recursive call
+ int op1 = price[i]*y + max_price(price,i+1,j,y+1,dp);
+ int op2 = price[j]*y + max_price(price,i,j-1,y+1,dp);
+ dp[i][j] = max(op1,op2); 
+  return max(op1,op2);
+
+}
+
+int main(){
+ 
+int price[] = {2,3,5,1,4}; 
+int n = sizeof(price)/sizeof(int);
+int dp[10][10] = {0};
+
+ cout<< max_price(price,0,n-1,1,dp) <<endl;
+
+
+}
