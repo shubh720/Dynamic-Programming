@@ -1,0 +1,32 @@
+#include<iostream>
+using namespace std;
+
+int number_of_ways(int n,int k,int* dp){
+  if(n <= 0){
+      return 1;
+  }
+ 
+ if(dp[n] != 0){
+     // already calculated 
+    return dp[n]; 
+ }
+ 
+int val = 0;
+  for(int i=1;i<=k;i++){
+      if(n-i >= 0){
+         val += number_of_ways(n-i,k,dp);
+         dp[n] = val;
+      }
+  }
+  return val; 
+}
+
+int main(){
+
+ int n,k;
+ cin>>n>>k;
+ int dp[100] = {0};
+
+   cout<< number_of_ways(n,k,dp) <<endl;
+return 0;
+}
