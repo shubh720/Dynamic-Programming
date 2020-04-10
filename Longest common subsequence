@@ -1,0 +1,36 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+int largest_common_subsq(int i,int j,char *str1,char *str2,int len1,int len2){
+ // base case
+   if(i == len1 || j == len2){
+       return 0;  // end of particular string
+   }
+
+ // when both char are equal
+ if(str1[i] == str2[j]){
+   return 1 + largest_common_subsq(i+1,j+1,str1,str2,len1,len2);
+ }
+
+int x,y;
+ if(str1[i] != str2[j]){
+    x = largest_common_subsq(i,j+1,str1,str2,len1,len2);
+    y = largest_common_subsq(i+1,j,str1,str2,len1,len2);
+ }
+return max(x,y);
+}
+
+int main(){
+
+ //char str1[] = "abcde";
+ //char str2[] = "cadbe";
+ char str1[] = "abcde";
+ char str2[] = "fabcde";
+
+ int len1 = strlen(str1);
+ int len2 = strlen(str2);
+
+   cout<< largest_common_subsq(0,0,str1,str2,len1,len2);
+ return 0;
+}
